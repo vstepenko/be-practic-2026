@@ -1,0 +1,27 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet id="create_table_catalog" author="danmos">
+        <createTable tableName="catalog">
+            <column name="id" type="varchar">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="item_name" type="varchar"/>
+            <column name="description" type="varchar"/>
+            <column name="icon" type="varchar"/>
+        </createTable>
+    </changeSet>
+
+
+    <changeSet id="add_first_value" author="danmos">
+        <insert tableName="catalog">
+            <column name="id" value="014ea123-94c9-44bd-b941-de0772f5fa50"/>
+            <column name="item_name" value="iPhone 17"/>
+            <column name="description" value="negropen"/>
+            <column name="icon" value="Icon1"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
