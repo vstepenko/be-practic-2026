@@ -24,4 +24,10 @@
         </insert>
     </changeSet>
 
+    <changeSet id="catalog_attributes" author="Yevhenii Androsov">
+        <addColumn tableName="catalog">
+                <column name="attributes" type="varchar"/>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>
