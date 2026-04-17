@@ -24,4 +24,6 @@ public class CatalogEntity {
 
     private String icon;
 
+    private String attributes;
+
 }
