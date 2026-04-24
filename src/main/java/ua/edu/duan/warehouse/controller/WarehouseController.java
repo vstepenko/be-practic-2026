@@ -39,5 +39,10 @@ public class WarehouseController {
 
 
     }
+
+    @PostMapping("/item")
+    public void addItem(@RequestBody ItemDto itemDto) {
+
+    }
 }
 
