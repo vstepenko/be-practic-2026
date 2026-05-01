@@ -12,71 +12,43 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import ua.edu.duan.warehouse.dao.entity.CatalogEntity;
-import ua.edu.duan.warehouse.dao.repository.CatalogRepository;
-
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import ua.edu.duan.warehouse.service.CatalogService;
 
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-
 public class WarehouseController {
 
-    private final CatalogRepository catalogRepository;
-    ObjectMapper objectMapper = new ObjectMapper();
-
+    private final CatalogService catalogService;
+    private final ObjectMapper objectMapper;
 
     @GetMapping("/hello-world")
     public String sayHelloWorld() {
         return "Hello World - advanced logic";
     }
 
-
     @GetMapping("/warehouse")
     public String getItems() throws JsonProcessingException {
-        List<CatalogEntity> catalogEntityList=  catalogRepository.findAll();
-
-        return objectMapper.writeValueAsString(catalogEntityList);
-
-
+        return objectMapper.writeValueAsString(catalogService.getAllItems());
     }
 
     @PostMapping("/item")
     public void addItem(@RequestBody ItemDto itemDto) {
-        CatalogEntity entity = new CatalogEntity();
-        entity.setId(UUID.randomUUID().toString());
-        entity.setItemName(itemDto.getItemName());
-        entity.setDescription(itemDto.getDescription());
-        entity.setIcon(itemDto.getIcon());
-        entity.setAttributes(itemDto.getAttributes());
-        catalogRepository.save(entity);
+        catalogService.addItem(itemDto);
     }
 
     @PutMapping("/item/{id}")
     public void updateItem(@PathVariable String id, @RequestBody ItemDto itemDto) {
-        Optional<CatalogEntity> existingOpt = catalogRepository.findById(id);
-        if (existingOpt.isEmpty()) {
-            throw new RuntimeException("Item not found");
-        }
-        CatalogEntity entity = existingOpt.get();
-        entity.setItemName(itemDto.getItemName());
-        entity.setDescription(itemDto.getDescription());
-        entity.setIcon(itemDto.getIcon());
-        entity.setAttributes(itemDto.getAttributes());
-        catalogRepository.save(entity);
+        catalogService.updateItem(id, itemDto);
     }
 
     @DeleteMapping("/item/{id}")
     public void deleteItem(@PathVariable String id) {
-        catalogRepository.deleteById(id);
+        catalogService.deleteItem(id);
     }
 
     @GetMapping("/warehouse/search")
     public String searchItems(@RequestParam String prefix) throws JsonProcessingException {
-        List<CatalogEntity> results = catalogRepository.findByItemNameStartingWithIgnoreCase(prefix);
-        return objectMapper.writeValueAsString(results);
+        return objectMapper.writeValueAsString(catalogService.searchItemsByPrefix(prefix));
     }
 }
