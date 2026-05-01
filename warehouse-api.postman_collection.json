@@ -94,6 +94,24 @@
 					"path": ["api", "item", "{{itemId}}"]
 				}
 			}
+		},
+		{
+			"name": "Search Items by Name Prefix",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/warehouse/search?prefix=sample",
+					"host": ["{{baseUrl}}"],
+					"path": ["api", "warehouse", "search"],
+					"query": [
+						{
+							"key": "prefix",
+							"value": "sample"
+						}
+					]
+				}
+			}
 		}
 	]
 }

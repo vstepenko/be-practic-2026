@@ -73,4 +73,10 @@ public class WarehouseController {
     public void deleteItem(@PathVariable String id) {
         catalogRepository.deleteById(id);
     }
+
+    @GetMapping("/warehouse/search")
+    public String searchItems(@RequestParam String prefix) throws JsonProcessingException {
+        List<CatalogEntity> results = catalogRepository.findByItemNameStartingWithIgnoreCase(prefix);
+        return objectMapper.writeValueAsString(results);
+    }
 }
