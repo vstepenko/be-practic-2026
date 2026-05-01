@@ -14,6 +14,7 @@ import ua.edu.duan.warehouse.dao.entity.CatalogEntity;
 import ua.edu.duan.warehouse.dao.repository.CatalogRepository;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api")
@@ -42,7 +43,12 @@ public class WarehouseController {
 
     @PostMapping("/item")
     public void addItem(@RequestBody ItemDto itemDto) {
-
+        CatalogEntity entity = new CatalogEntity();
+        entity.setId(UUID.randomUUID().toString());
+        entity.setItemName(itemDto.getItemName());
+        entity.setDescription(itemDto.getDescription());
+        entity.setIcon(itemDto.getIcon());
+        entity.setAttributes(itemDto.getAttributes());
+        catalogRepository.save(entity);
     }
 }
-
