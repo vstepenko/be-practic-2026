@@ -1,0 +1,137 @@
+{
+  "info": {
+    "name": "Warehouse API",
+    "description": "Колекція запитів для управління складом (Catalog + Category)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Catalog",
+      "item": [
+        {
+          "name": "Hello World",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8080/api/hello-world",
+              "host": ["http://localhost:8080"],
+              "path": ["api", "hello-world"]
+            }
+          }
+        },
+        {
+          "name": "Get all items",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8080/api/warehouse",
+              "host": ["http://localhost:8080"],
+              "path": ["api", "warehouse"]
+            }
+          }
+        },
+        {
+          "name": "Add item",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"itemName\": \"iPhone 17\",\n  \"description\": \"negropen\",\n  \"icon\": \"Icon1\",\n  \"attributes\": \"attr1,attr2\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/item",
+              "host": ["http://localhost:8080"],
+              "path": ["api", "item"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Category",
+      "item": [
+        {
+          "name": "Get all categories",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8080/api/categories",
+              "host": ["http://localhost:8080"],
+              "path": ["api", "categories"]
+            }
+          }
+        },
+        {
+          "name": "Get category by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8080/api/categories/{{categoryId}}",
+              "host": ["http://localhost:8080"],
+              "path": ["api", "categories", "{{categoryId}}"]
+            }
+          }
+        },
+        {
+          "name": "Create category",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Електроніка\",\n  \"description\": \"Товари категорії електроніки\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/categories",
+              "host": ["http://localhost:8080"],
+              "path": ["api", "categories"]
+            }
+          }
+        },
+        {
+          "name": "Update category",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Електроніка оновлена\",\n  \"description\": \"Оновлений опис\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/categories/{{categoryId}}",
+              "host": ["http://localhost:8080"],
+              "path": ["api", "categories", "{{categoryId}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete category",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "http://localhost:8080/api/categories/{{categoryId}}",
+              "host": ["http://localhost:8080"],
+              "path": ["api", "categories", "{{categoryId}}"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
